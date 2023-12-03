@@ -108,8 +108,6 @@ const MessageBox = styled.div`
   font-weight: 500;
 `;
 const Report = () => {
-  const date = '2023.11.23';
-  const question = 'Q. 1분 자기소개를 해주세요.';
   const speedmsg = [
     '말의 빠르기는 아주 적절해요! 말하면서 급하게 느껴지지 않으면서도 듣는 사람이 지루하지 않을 만큼의 속도감을 유지하고 있어요. 이대로 계속 연습해주세요. 참고로 적절한 말의 빠르기는 평균적으로 120~150단어/분 입니다.',
     '현재 말의 빠르기가 조금 빠른 편이에요. 너무 빨리 말하면 듣는 사람이 받아들이기 힘들 수 있어요. 조금 더 여유롭게, 효과적인 강조와 휴식을 활용하여 말해보세요. 참고로 적절한 말의 빠르기는 평균적으로 120~150단어/분 입니다.',
@@ -137,7 +135,16 @@ const Report = () => {
     '표정 처리가 아주 좋습니다. 웃음을 잘 유지하면서도 감정에 따라 다양한 표정을 보여주셨어요. 이대로 계속 연습해주세요.',
     '표정 처리가 조금 아쉽습니다. 얼굴 표정이 한결같이 일정하면, 감정의 빈약함을 보여줄 수 있어요. 감정에 따라 표정을 다양하게 연출해보세요.',
   ];
-
+  const result = [
+    '2023.11.23',
+    'Q. 1분 자기소개를 해주세요.',
+    'Good',
+    '그래서',
+    'Bad',
+    'Bad',
+    'Good',
+    'Good',
+  ]; //api
   const Emoji = ({ what, emo }) => {
     let emojiSrc;
     if (emo === 'Bad') {
@@ -173,10 +180,10 @@ const Report = () => {
 
     if (item !== '자주 사용한 단어') {
       if (emo === 'Bad') {
-        emojiSrc = grinning; // SVG 파일 경로로 변경
+        emojiSrc = grinning;
         message = <MessageBox>{msgList[1]}</MessageBox>;
       } else if (emo === 'Good') {
-        emojiSrc = joy; // SVG 파일 경로로 변경
+        emojiSrc = joy;
         message = <MessageBox>{msgList[0]}</MessageBox>;
       }
     } else {
@@ -206,28 +213,28 @@ const Report = () => {
   return (
     <ReportWallpaper>
       <Container>
-        <DateBox>{date}</DateBox>
+        <DateBox>{result[0]}</DateBox>
         <Innerbox>
           <RowBox>
-            <QuestionText>{question}</QuestionText>
+            <QuestionText>{result[1]}</QuestionText>
             <EmojiSet>
-              <Emoji what="말의 빠르기" emo="Good" key="speed" />
-              <Emoji what="목소리 크기" emo="Bad" key="volume" />
-              <Emoji what="목소리 톤" emo="Bad" key="tone" />
-              <Emoji what="시선 처리" emo="Good" key="gaze" />
-              <Emoji what="표정" emo="Good" key="expression" />
+              <Emoji what="말의 빠르기" emo={result[2]} key="speed" />
+              <Emoji what="목소리 크기" emo={result[4]} key="volume" />
+              <Emoji what="목소리 톤" emo={result[5]} key="tone" />
+              <Emoji what="시선 처리" emo={result[6]} key="gaze" />
+              <Emoji what="표정" emo={result[7]} key="expression" />
             </EmojiSet>
           </RowBox>
           <ReportMsg
             className="first-reportmsg"
             item="말의 빠르기"
-            emo="Good"
+            emo={result[2]}
           />
-          <ReportMsg item="자주 사용한 단어" emo="Bad" word="그래서" />
-          <ReportMsg item="목소리 크기" emo="Bad" />
-          <ReportMsg item="목소리 톤" emo="Bad" />
-          <ReportMsg item="시선처리" emo="Good" />
-          <ReportMsg item="표정" emo="Good" />
+          <ReportMsg item="자주 사용한 단어" word={result[3]} />
+          <ReportMsg item="목소리 크기" emo={result[4]} />
+          <ReportMsg item="목소리 톤" emo={result[5]} />
+          <ReportMsg item="시선처리" emo={result[6]} />
+          <ReportMsg item="표정" emo={result[7]} />
         </Innerbox>
       </Container>
     </ReportWallpaper>
